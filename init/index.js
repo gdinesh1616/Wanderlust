@@ -7,7 +7,7 @@ main()
 .then(()=>{console.log("connected to db")})
 .catch(err => console.log(err));
 async function main() {
-  await mongoose.connect("mongodb+srv://DINESH:DINESH123@cluster0.kkav7fk.mongodb.net/?appName=Cluster0");
+  await mongoose.connect("MONGO_URL");
 }
 
 const initDB = async ()=>{
