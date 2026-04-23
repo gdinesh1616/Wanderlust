@@ -1,0 +1,123 @@
+<% layout('layouts/boilerplate') -%>
+<script>
+    let mapToken ='<%=process.env.MAP_KEY%>';
+    console.log(mapToken);
+</script>
+
+<div class="show">
+        <div class="show1">
+            <h3><%=listing.title%></h3>
+            <img src="<%=listing.image.path%>">
+            <p>Created by <i><%=listing.owner.username%></i></p>
+        </div>
+    <div class="content">
+        <div class="show2">
+            <p><b><%=listing.description%></b></p>
+            <p> &#8377 <%=listing.price.toLocaleString("en-IN")%>/night</p>
+            <p><i class="fa-solid fa-location-dot"></i><%=listing.location%>,<%=listing.country%></p>
+            <hr>
+            <div class="captiondiv">
+                <p class="caption" id="caption">&nbsp;&nbsp;&nbsp;&nbsp;<%=listing.caption%></p>
+                <button class="caption-extended-btn" id="caption-extended-btn" >Read More</button>
+            </div>
+            
+            <hr>
+            <%if(user&& user._id.equals(listing.owner._id)){%>
+                <form method="GET" action="<%=listing._id%>/edit">
+                    <button type="submit" class="btn btn-danger">
+                        EDIT
+                    </button>
+                </form>
+                <form method="POST" action="<%=listing._id%>/delete?_method=DELETE">
+                   <button type="submit" class="btn btn-danger deleteBtn">
+                       DELETE
+                   </button>
+                </form>
+            <%}%>
+        </div>  
+        <%if(user){%>
+        <div>
+            <form action="/listings/<%=listing._id%>/reviews" method="POST"> 
+            <h5>LEAVE A REVIEW</h5>
+            <label for="rating" class="form-label">Rating</label>
+            <fieldset class="starability-slot">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+            <div>
+                <label for="comment" class="form-label"></label>
+                     <textarea id="comment" placeholder="comment" name="review[comment]" class="form-control comment" required></textarea>
+                </div>
+                <button class="btn btn-danger">Submit</button>
+            </form>
+    
+    </div>
+    <%}%>  
+    </div>  
+
+
+
+
+<% if(listing.review.length>0){%>
+    <div class="showreview">
+        <h3>Reviews</h3>
+        <div class="review-card-rows">
+        <%for(let i=0;i<listing.review.length;i++){%>
+            <div class="card review-card col-5 mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><b>@<%=listing.review[i].author.username%></b></h5>
+                    <p class="starability-result" data-rating="<%=listing.review[i].rating%>">
+                        Rated: 3 stars
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Created_at <%=listing.review[i].createdAt%></h6>
+                    <p class="card-text"><%=listing.review[i].comment%></p>
+                </div>
+                <%if(user && listing.review[i] && user._id.equals(listing.review[i].author._id )){%>
+                <form method="POST" action="/listings/<%=listing._id%>/reviews/<%=listing.review[i]._id%>?_method=DELETE">
+                    <button class="btn btn-sm btn-dark btn-delete">Delete</button>
+                </form>
+                <%}%>
+            </div>
+            <%}%>
+        </div>
+  
+
+    </div>
+ <%}%>
+ </div>
+    <div class="col-6">
+        <h4><b>Where you'll be</b></h4>
+        <iframe width="500" height="300" allow="geolocation" src="https://api.maptiler.com/maps/streets-v4/?key=xyBe2gWRTHp4S1QR9gP9#8/26.18666383173791/91.69715084869169"></iframe>
+        <div id="map"></div>
+    </div>
+
+
+
+<script>
+    let captionBtn = document.getElementById("caption-extended-btn");
+    let content = document.getElementById("caption");
+    captionBtn.addEventListener("click",()=>{
+        console.log("clicked");
+    if(caption.style.webkitLineClamp == "6"){
+        captionBtn.innerText = "Read less"
+      caption.style.webkitLineClamp = "20";
+    }else{
+        captionBtn.innerText = "Read More"
+      caption.style.webkitLineClamp = "6";
+    }
+        
+    })
+</script>
+
+    
+    
+

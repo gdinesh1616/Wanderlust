@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') -%>
+<!-- <body>
+    <h3>Create a new Listing</h3>
+    <form method="POST" action="/listings">
+        <input name="title" placeholder="title"><br>
+        <input name="description" placeholder="add description of your place"><br>
+        <input name="price" placeholder="in rupees"><br>
+        <input name="image" placeholder="url"><br>
+        <input name="location" placeholder="location"><br>
+        <input name="country" placeholder="country"><br>
+        <button>AIRBNB</button>
+    </form>
+</body> -->
+<form class="row g-3 needs-validation" method="POST" action="/listings" enctype="multipart/form-data">
+  <div class="col-md-6">
+    <label for="inputtitle"  >Title</label>
+    <input type="text" name="listing[title]" class="form-control" id="inputtitle" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">Price(&#8377)</label>
+    <input type="text" class="form-control" name="listing[price]" id="inputPassword4" required>
+  </div>
+  <div class="col-12">
+    <label for="inputAddress" class="form-label" >Description</label>
+    <input type="text" class="form-control" id="inputAddress" name="listing[description]" placeholder="1234 Main St" required>
+  </div>
+  <div class="col-12">
+    <label for="inputAddress2" class="form-label">Address</label>
+    <input type="text" name="listing[location]" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputCity" class="form-label">Upload image for listing</label>
+    <input type="file" name="listing[img]" class="form-control" id="inputCity" required>
+  </div>
+  <div class="col-md-6">
+    <label for="inputState" class="form-label">Country</label>
+    <input type="text" name="listing[country]" class="form-control" id="inputCity" required>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-danger add-btn">ADD</button>
+  </div>
+</form>

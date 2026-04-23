@@ -1,0 +1,160 @@
+<style>
+  .nav-mid{
+    margin:auto;
+  }
+  .btn-div
+  {
+    border-radius: 100%;
+    background-color: rgb(255, 90, 95);
+  }
+  .search-div{
+    border:2px solid rgb(196, 196, 196);
+    display:flex;
+    border-radius: 2rem;
+    padding-left:0.6rem;
+  }
+  .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: inherit;
+}
+.nav-login-user-card{
+  display: none;
+  justify-content: center; /* horizontal center */
+  align-items: center;  
+  height:200px;
+  width:160px;
+  background-color: rgb(255, 255, 255);
+  border-radius:7%;
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.3);
+  position:fixed;
+  right:1rem;
+  top:5.3rem;
+  z-index: 10;
+  
+}
+.nav-login-user-card-link:hover{
+  background-color: rgb(211, 211, 211,0.5);
+  justify-content: center;
+}
+.nav-login-user-card-link{
+  margin:0.5rem;
+  height:2.5rem;
+  padding:0.5rem;
+  align-items: center;
+}
+.nav-login-user-link{
+  text-decoration: none;
+  color:black;
+}
+.nav-logout-user-card{
+    display: none;
+  justify-content: center; /* horizontal center */
+  align-items: center;  
+  height:160px;
+  width:160px;
+  background-color: rgb(255, 255, 255);
+  border-radius:7%;
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.3);
+  position:fixed;
+  right:1rem;
+  top:5.3rem;
+  z-index: 10;
+}
+.nav-login-user{
+  border-radius: 100%;
+  border: 1px solid grey;
+}
+.nav-right-host:hover{
+  background-color: rgba(241, 241, 241, 0.6);
+  border-radius: 2rem;
+  width:10rem;
+}
+.nav-right-host a{
+  justify-self: center;
+  margin:1.3rem;
+}
+</style>
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav nav-left">
+        <a class="navbar-brand" href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg" alt="Logo" width="100" height="55" class="d-inline-block align-text-top">
+        </a>
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      <div class="navbar nav-mid">
+        <div class="search-div" >
+          <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search" style="border:none"/>
+                      <div class="btn-div">
+                          <button class="btn btn-search" type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+          </form>
+          </div>
+      </div>
+
+      <div class="logging ms-auto nav-right">
+        <div class="nav-right-host">
+           <a class="nav-link" href="/listings/new"><b>Become a host</b></a>
+        </div>
+       
+        <div class="nav-right-user-btn">
+          <button class="nav-login-user" id="nav-login-user">
+          <i class="fa-solid fa-user"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+  <%if(!user){%>
+   <div class="nav-login-user-card" id="nav-login-user-card"> 
+  <div class="nav-login-user-card-link">
+    <a class="nav-login-user-link" aria-current="page" href="/user/signup">Sign Up</a>
+  </div>
+  <div class="nav-login-user-card-link">
+    <a class="nav-login-user-link" href="/user/login">Log In</a>
+  </div>
+  <div class="nav-login-user-card-link">
+    <a class="nav-login-user-link" href="/listings/new"><b>Become a host</b></a>
+  </div>
+
+  <div class="nav-login-user-card-link">
+    <p class="nav-login-user-link">Help Center <i class="fa-regular fa-circle-question"></i></p>
+    </div>
+    </div>
+  <%}else{%>
+    <div class="nav-logout-user-card" id="nav-login-user-card"> 
+    <div class="nav-login-user-card-link">
+      <a class="nav-login-user-link" href="/user/logout">Log Out</a>
+    </div>
+    <div class="nav-login-user-card-link">
+    <a class="nav-login-user-link" href="/listings/new"><b>Become a host</b></a>
+  </div>
+    <div class="nav-login-user-card-link">
+    <p class="nav-login-user-link">Help Center <i class="fa-regular fa-circle-question"></i></p>
+    </div>
+  </div>
+  <%}%>
+  
+  
+<script>
+  let btn = document.getElementById("nav-login-user");
+  let card = document.getElementById("nav-login-user-card")
+  btn.addEventListener("click",()=>{
+    if(card.style.display == "none"){
+      card.style.display = "inline";
+    }else{
+      card.style.display = "none";
+    }
+    
+  })
+</script>
+<!-- <%if(!user){%> <a class="nav-link" aria-current="page" href="/user/signup">Sign Up</a> <a class="nav-link" href="/user/login">Log In</a> <%}else{%> <a class="nav-link" href="/user/logout">Log Out</a> <%}%> -->
