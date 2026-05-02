@@ -32,4 +32,16 @@ Wanderlust is a travel-based web application that allows users to explore destin
 ```bash
 git clone https://github.com/gdinesh1616/wanderlust.git
 cd wanderlust
-
+```
+2.Install dependencies
+```npm install```
+3.Set up environment variables
+Create a .env file in the root directory:
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection
+CLOUDINARY_KEY=your_key
+CLOUDINARY_SECRET=your_secret
+```
+4.Run the project
+```npm start```
